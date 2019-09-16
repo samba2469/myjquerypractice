@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Addregdata";
+}
+
+<h2>Addregdata</h2>
+<script src="~/scripts/bootstrap.js"></script>
+<script src="~/scripts/bootstrap.min.js"></script>
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+
+<button type="button" class="btn-block"  style="width:225px">open model</button> 
+<div class="modal fade" id="mymodel" role="dialog" data-url='@Url.Action("Add","Home")'></div>
+<script>
+    $(document).ready(function () {
+        $('.btn-block').click(function () {
+            debugger;
+            var url = $('#myModal').data('url');
+            $.get(url,function(data){
+
+                $('#myModal').html(data);
+                $('#myModal').modal('show');
+           });
+            });
+    });
+</script>

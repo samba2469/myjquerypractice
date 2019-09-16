@@ -17,9 +17,10 @@ namespace myjquerypractice.Controllers
         }
         public JsonResult Display_userdetails(register _reguserdata)
         {
-
+            _modaldata = new sivaEntities();
+            var data = _modaldata.Diplay_All().ToList();
            
-            return Json(_reguserdata,JsonRequestBehavior.AllowGet);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public PartialViewResult Create()   //Insert PartialView  
@@ -33,6 +34,15 @@ namespace myjquerypractice.Controllers
             _modaldata = new sivaEntities();
             _modaldata.register_Insert(_reguserdata.id,_reguserdata.name,_reguserdata.password,_reguserdata.email,_reguserdata.phno,_reguserdata.dateofbirth,_reguserdata.gender,_reguserdata.language,_reguserdata.address);
             _modaldata.SaveChanges();
+            return View();
+        }
+        public PartialViewResult Add()   //Insert PartialView  
+        {
+            return PartialView();
+        }
+        public ActionResult Addregdata()   //Insert PartialView  
+        {
+
             return View();
         }
 
