@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<h2>REGISTRATION FORM</h2>
+<html>
+<head>
+    <script src="~/scripts/jquery-3.4.1.min.js"></script>
+    <style>
+        .row {
+            padding: 10px;
+            width: 450px;
+        }
+
+        .Width150px {
+            width: 100px;
+            display: inline-block;
+        }
+
+        #tabeldata tr:nth-child(even) {
+            background-color: darkgrey;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            //loaddata();
+            //$("#tabeldata td:odd").css("background-color", "LightGray");
+            //$("table#tabeldata tr:even").css("background-color", "LightBlue");
+            $("#Regsister").click(function () {
+
+                Insertdata();
+
+            });
+        });
+    
+          
+     
+
+        function CreateEmployee() {
+            debugger;
+            var div = $("#OpenDilog");
+            div.load(" /Home/Create", function () {
+                div.dialog({
+                    modal: true,
+                    width: 200,
+                    height: 100,
+                    title: "Add New Employee",
+                    resizable: false
+                });
+            });
+        }
+
+
+        //Display the all user data
+        function loaddata() {
+            $.ajax({
+                // url: "/Home/Diplay",
+                url: '@Url.Action("Display_userdetails", "Home")',
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result.length > 0) {
+
+
+                        $("#tabledata").css({ "visibility": "visible", "background-color": "yellow", "font-size": "200%," });
+
+                        var dynamichtml = '';
+                        $.each(result, function (key, item) {
+                            debugger;
+                            if (item.dateofbirth != null) {
+                                var dt = new Date(parseInt(item.dateofbirth.replace('/Date(', '')));
+                                var dtfinal = AddLeadingZeros(dt.getFullYear(), 4) + '/' +
+                                    AddLeadingZeros(dt.getMonth() + 1, 2) + '/' + AddLeadingZeros(dt.getDate(), 2)
+                            }
+                            dynamichtml += '<tr>';
+                            dynamichtml += '<td style="visibility:hidden">' + item.id + '</td>';
+                            dynamichtml += '<td>' + item.name + '</td>';
+                            dynamichtml += '<td>' + item.password + '</td>'; dynamichtml += '<td>' + item.email + '</td>'; dynamichtml += '<td>' + item.phno + '</td>';
+                            dynamichtml += '<td>' + dtfinal + '</td>'; dynamichtml += '<td>' + item.gender + '</td>';
+                            dynamichtml += '<td>' + item.language + '</td>'; dynamichtml += '<td>' + item.address + '</td>';
+                            dynamichtml += '</tr>';
+                        });
+
+                        $('.tbody').html(dynamichtml);
+                    }
+                },
+
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+
+
+            });
+            function AddLeadingZeros(number, size) {
+                var s = "0000" + number;
+                return s.substr(s.length - size)
+            }
+        };
+
+
+
+
+    </script>
+</head>
+<body>
+    <form>
+        <div style="border:groove;background-color:powderblue">
+            <div class="row" style="visibility:hidden">
+                <label for="id" class="Width150px"><strong>ID:</strong><span style="color:red;"> *</span></label>
+                <input type="text" id="txtid" />
+            </div>
+            <div class="row">
+                <label for="FullName" class="Width150px"><strong>FullName:</strong><span style="color:red"> *</span></label>
+                <input type="text" id="txtname" />
+            </div>
+            <div class="row">
+                <label for="Pwd" class="Width150px"><strong>PassWord:</strong><span style="color:red"> *</span></label>
+                <input type="password" id="txtpwd" />
+            </div>
+            <div class="row">
+                <label for="Email" class="Width150px"><strong>Email:</strong><span style="color:red"> *</span></label>
+                <input type="text" id="txtemail" />
+            </div>
+            <div class="row">
+                <label for="PHNO" class="Width150px"><strong>PHNO:</strong><span style="color:red"> *</span></label>
+                <input type="text" id="txtphno" />
+            </div>
+            <div class="row">
+                <label for="Date" class="Width150px"><strong>Date OF Birth:</strong><span style="color:red"> *</span></label>
+                <input type="date" id="txtdate" />
+            </div>
+
+            <div class="row">
+                <label for="Gender" class="Width150px"><strong>Gender:</strong><span style="color:red"> *</span></label>
+                <input type="radio" id="male" name="Gender" value="MALE" />MALE
+                <input type="radio" id="Female" name="Gender" value="Female" />FEMALE
+            </div>
+            <div id="mydiv" class="row">
+                <label for="Gender" class="Width150px"><strong> Language:</strong></label>
+                <input type="checkbox" name="Language" value="DEVELOPER" />DEVELOPER
+                <input type="checkbox" name="Language" value="DESIGNER" />DESIGNER
+                <input type="checkbox" name="Language" value="TESTER" />TESTER
+
+
+            </div>
+            <div class="row">
+                <label for="Address" class="Width150px"><STRONG>Address:</STRONG></label>
+                ​<textarea id="txtaddress" rows="5" cols="30"></textarea>
+            </div>
+            <div class="row">
+
+                <input type="submit" id="Regsister" />
+            </div>
+        </div>
+    </form>
+    <div style="padding:7px 0;">
+        <input type="button" id="hh" value="Add New Employee" onclick="CreateEmployee()" />
+    </div>
+    @*<table id="tabeldata">
+        <thead style="background-color:cornflowerblue">
+            <tr>
+                <th style="visibility:hidden">ID</th>
+                <th>NAME</th>
+                <th>PASSWORD</th>
+                <th>EMAIL</th>
+                <th>PHONE NO</th>
+                <th>DATE OF BIRTH</th>
+                <th>GENDER</th>
+                <th>LANGUAGE</th>
+                <th>ADDRESS</th>
+            </tr>
+        </thead>
+        <tbody class="tbody"></tbody>
+    </table>*@
+    
+
+</body>
+  
+</html>

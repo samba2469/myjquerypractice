@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Display_userdetails";
+}
+<h2>Display_userdetails</h2>
+<script src="~/scripts/jquery-3.4.1.min.js"></script>
+<script>
+    //insert new user data.
+    function Insertdata() {
+        var _reguserdata = {}
+        _reguserdata.id = $('#txtid').val();
+        _reguserdata.name = $('#txtname').val();
+        _reguserdata.password = $('#txtpwd').val();
+        _reguserdata.email = $('#txtemail').val();
+        _reguserdata.phno = $('#txtphno').val();
+        _reguserdata.dateofbirth = $('#txtdate').val();
+        _reguserdata.gender = $("input[name='Gender']:checked").val();
+        _reguserdata.address = $.trim($('#txtaddress').val());
+        var chk = $('input[type="checkbox"]:checked');
+        if (chk.length > 0) {
+            var chklanguage = "";
+            chk.each(function () {
+                chklanguage += $(this).val() + ",";
+            });
+        };
+        alert(chklanguage + ",");
+        _reguserdata.language = chklanguage;
+
+
+
+        $.ajax({
+            url: '@Url.Action("indert_data", "Home")',
+            // url: "/Home/indert_data",
+            type: "POST",
+            data: JSON.stringify(_reguserdata),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result, status, xhr) {
+                alert("success");
+                loaddata();
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+
+        });
+        debugger;
+        loaddata();
+    }
+</script>
+
+<table id="tabeldata">
+    <thead style="background-color:cornflowerblue">
+        <tr>
+            <th style="visibility:hidden">ID</th>
+            <th>NAME</th>
+            <th>PASSWORD</th>
+            <th>EMAIL</th>
+            <th>PHONE NO</th>
+            <th>DATE OF BIRTH</th>
+            <th>GENDER</th>
+            <th>LANGUAGE</th>
+            <th>ADDRESS</th>
+        </tr>
+    </thead>
+    <tbody class="tbody"></tbody>
+</table>
+
+
+
