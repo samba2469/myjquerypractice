@@ -34,8 +34,26 @@ namespace myjquerypractice.Controllers
             _modaldata = new sivaEntities();
             _modaldata.register_Insert(_reguserdata.id,_reguserdata.name,_reguserdata.password,_reguserdata.email,_reguserdata.phno,_reguserdata.dateofbirth,_reguserdata.gender,_reguserdata.language,_reguserdata.address);
             _modaldata.SaveChanges();
-            return View();
+           // return RedirectToAction("displaydata","Home");
+            return Redirect("~/Home/displaydata");
+
+
         }
+        ////public IActionResult Details()
+        ////{
+
+        ////    return PartialView("Your Partial View");
+        ////}
+        [HttpGet]
+        public ActionResult displaydata()
+        {
+            _modaldata = new sivaEntities();
+            var data = _modaldata.Diplay_All().ToList();
+            ViewBag.userdata = data;
+            return PartialView("_Displaydata", data);
+         
+        }
+
         public PartialViewResult Add()   //Insert PartialView  
         {
             return PartialView();
@@ -43,7 +61,7 @@ namespace myjquerypractice.Controllers
         public ActionResult Addregdata()   //Insert PartialView  
         {
 
-            return View();
+            return RedirectToAction("Add");
         }
 
     }

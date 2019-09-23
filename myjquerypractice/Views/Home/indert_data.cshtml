@@ -1,0 +1,66 @@
+﻿
+<script>
+    function loaddata() {
+        $.ajax({
+            // url: "/Home/Diplay",
+            url: '@Url.Action("Display_userdetails", "Home")',
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                if (result.length > 0) {
+
+
+                    $("#tabledata").css({ "visibility": "visible", "background-color": "yellow", "font-size": "200%," });
+
+                    var dynamichtml = '';
+                    $.each(result, function (key, item) {
+                        debugger;
+                        if (item.dateofbirth != null) {
+                            var dt = new Date(parseInt(item.dateofbirth.replace('/Date(', '')));
+                            var dtfinal = AddLeadingZeros(dt.getFullYear(), 4) + '/' +
+                                AddLeadingZeros(dt.getMonth() + 1, 2) + '/' + AddLeadingZeros(dt.getDate(), 2)
+                        }
+                        dynamichtml += '<tr>';
+                        dynamichtml += '<td style="visibility:hidden">' + item.id + '</td>';
+                        dynamichtml += '<td>' + item.name + '</td>';
+                        dynamichtml += '<td>' + item.password + '</td>'; dynamichtml += '<td>' + item.email + '</td>'; dynamichtml += '<td>' + item.phno + '</td>';
+                        dynamichtml += '<td>' + dtfinal + '</td>'; dynamichtml += '<td>' + item.gender + '</td>';
+                        dynamichtml += '<td>' + item.language + '</td>'; dynamichtml += '<td>' + item.address + '</td>';
+                        dynamichtml += '</tr>';
+                    });
+
+                    $('.tbody').html(dynamichtml);
+                }
+            },
+
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+
+
+        });
+        function AddLeadingZeros(number, size) {
+            var s = "0000" + number;
+            return s.substr(s.length - size)
+        }
+    };
+
+</script>
+<table id="tabeldata">
+    <thead style="background-color:cornflowerblue">
+        <tr>
+            <th style="visibility:hidden">ID</th>
+            <th>NAME</th>
+            <th>PASSWORD</th>
+            <th>EMAIL</th>
+            <th>PHONE NO</th>
+            <th>DATE OF BIRTH</th>
+            <th>GENDER</th>
+            <th>LANGUAGE</th>
+            <th>ADDRESS</th>
+        </tr>
+    </thead>
+    <tbody class="tbody"></tbody>
+</table>
