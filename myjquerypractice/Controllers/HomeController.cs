@@ -11,6 +11,8 @@ namespace myjquerypractice.Controllers
     {
         // GET: Home
         sivaEntities _modaldata = null;
+       
+   
         public ActionResult Index()
         {
             return View();
@@ -50,19 +52,28 @@ namespace myjquerypractice.Controllers
             _modaldata = new sivaEntities();
             var data = _modaldata.Diplay_All().ToList();
             ViewBag.userdata = data;
-            return PartialView("_Displaydata", data);
+            // return PartialView("_Displaydata", data);
+           return View();
          
         }
-
-        public PartialViewResult Add()   //Insert PartialView  
-        {
-            return PartialView();
-        }
-        public ActionResult Addregdata()   //Insert PartialView  
+        [HttpGet]
+        [Authorize]
+        public ActionResult test()
         {
 
-            return RedirectToAction("Add");
+            return View();
         }
+        [HttpPost]
+       
+       
+        [ValidateAntiForgeryToken]
+        public ActionResult test(int Id, string Name, string Address)
+        {
+            
+            
+            return View();        
+        }
+      
 
     }
 }

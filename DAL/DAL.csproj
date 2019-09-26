@@ -56,6 +56,7 @@
     <Compile Include="Diplay_All_Result.cs">
       <DependentUpon>sivaentitys.tt</DependentUpon>
     </Compile>
+    <Compile Include="Emp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="register.cs">
       <DependentUpon>sivaentitys.tt</DependentUpon>

@@ -1,14 +1,24 @@
 ﻿<!DOCTYPE html>
 
-<html style="background-image: url('../../Images/Backgrounds-image - Copy.jpg'); ">
+<html @*style="background-image: url('../../Images/Backgrounds-image - Copy.jpg'); "*@>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+       /*.navbar {
+  overflow: hidden;
+  background-color: #333;
+   position: fixed;
+}*/
        .navbar {
   overflow: hidden;
   background-color: #333;
+  position: fixed;
+  top: 0;
+
+
+  width: 100%;
 }
 
 .navbar a {
@@ -19,7 +29,10 @@
   padding: 14px 16px;
   text-decoration: none;
 }
-
+/*#headerdiv{
+   
+}*/
+  
 .dropdown {
   float: right;
   overflow: hidden;
@@ -75,11 +88,12 @@
 
     <div style="background-image:url()">
         <table style="width:100%">
-            <tr style="width:100%; background-color:cornflowerblue;">
+            <tr style="width:100%; background-color:#333;">
                 <td colspan="2" height="70" width="100%">
-                    <div class="navbar" style="text-align:center">
+                    <div  height="50" width="100%" class="navbar" id="headerdiv" style="text-align:center">
                         <H1 style="float:left;color:white;">SAMPLE PROJECT</H1>
                         <a href="#home"><i class="fa fa-home"></i> Home</a>
+                        <a href="/Home/displaydata"><i class="fa fa-home"></i> Home</a>
                         <a href="#news"><i class="fa fa-newspaper-o" aria-hidden="true"></i> News</a>
                         <div class="dropdown">
                             <button class="dropbtn">

@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="">
+<head>
+    <style>
+         .row {
+            padding: 10px;
+            width: 450px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/scripts/angular.min.js"></script>
+</head>
+<body ng-app="">
+    <form>
+        <div>
+            <div class="row">
+                Employe Id;
+                <input type="text" id="txtid" />
+            </div>
+            <div class="row">
+                Employe Name;
+                <input type="text" id="txtname" />
+            </div>
+            <div class="row">
+                Gender;
+                <input type="radio" id="txtgender" name="Gender" />Male
+                <input type="radio" id="txtgender" name="Gender" />FMale
+            </div>
+            <div class="row">
+                Qualification :
+                <input type="checkbox" id="txtBtech" />Betch
+                <input type="checkbox" id="txtmech" />Mech
+
+            </div>
+            <div class="row">
+                Date : <input type="date" name="date">
+            </div>
+            <div class="row">
+                Select Address :
+                <select value="">
+                    <option>--select--</option>
+                    <option>America</option>
+                    <option>Aus</option>
+                    <option>India</option>
+                </select>
+            </div>
+            <div class="row">
+                Select States :
+                <select value="">
+                    <option>--select--</option>
+                    <option>America</option>
+                    <option>Aus</option>
+                    <option>India</option>
+                </select>
+            </div>
+        </div>
+
+    </form>
+</body >
+</html>

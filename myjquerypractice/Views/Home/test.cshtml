@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "test";
+    //Layout = "~/Views/Home/Index.cshtml";
+}
+
+<h2>test</h2>
+<form action="/Home/test" method="post" >
+    <div>
+        @Html.AntiForgeryToken();
+        id :<input type="text" name="Id" id="id" />
+    </div>
+    <div>
+       
+        Name :<input type="text"name="Name" id="textname" />
+    </div>
+    <div>
+    
+        Address:<input type="text" name="Address" id="txtaddress" />
+    </div>
+    <div>
+       
+        id :<input type="submit" value="submit"/>
+    </div>
+</form>
+
